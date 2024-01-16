@@ -2,6 +2,8 @@
 
 > **Disclaimer**: This project is no longer maintained. Feel free to fork and
 improve it if you'd like - it is [vaporware](LICENSE) after all.
+>
+> Vaporware wishes to thank all the contributors: [ryjm](https://github.com/ryjm), [yungcalibri](https://github.com/yungcalibri), [vcavallo](https://github.com/vcavallo) and of course [rabsef-bicrym](https://github.com/rabsef-bicrym)
 
 `%mask` allows a pilot to log into their urbit with MetaMask from a public
 page.
