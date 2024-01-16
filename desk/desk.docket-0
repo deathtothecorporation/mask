@@ -1,0 +1,10 @@
+:~  title+'Mask'
+    info+'Log in to Urbit with Metamask'
+    color+0xff.4400
+    image+'https://nyc3.digitaloceanspaces.com/sogrum-savluc/sogrum-savluc/2023.6.02..18.13.47-mask-tile.png'
+    version+[1 2 0]
+    website+'https://vaporware.network'
+    license+'vaporware'
+    base+'mask'
+    site+/apps/mask/login
+==

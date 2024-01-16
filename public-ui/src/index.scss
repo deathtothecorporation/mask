@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'JetBrains Mono', monospace;
+    src: url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&display=swap');
+    font-display: swap;
+  }
+}
+
+html {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+#container {
+  height: 100vh;
+  @apply flex;
+  @apply flex-col;
+  @apply justify-between;
+}
+
+main {
+}
+
+a:hover {
+  @apply underline;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  @apply font-mono;
+  @apply bg-surface;
+  @apply text-body;
+}
+
+h1 {
+  @apply text-2xl;
+  @apply md:text-5xl;
+}
+h2 {
+  @apply text-3xl;
+}
+h3 {
+  @apply text-base;
+  @apply md:text-2xl;
+}
+h4 {
+  @apply text-xl;
+}
+
+button {
+  @apply rounded-md;
+  @apply border;
+  @apply border-body;
+  @apply py-4;
+  @apply px-8;
+  @apply bg-surface-dark;
+  @apply drop-shadow-md;
+  @apply text-body-light;
+  @apply font-bold;
+}
+button:hover {
+  @apply drop-shadow-sm;
+  @apply opacity-90;
+}
+button:active {
+  @apply opacity-80;
+  @apply shadow-inner;
+}
+button {
+  @apply transition-opacity;
+  @apply ease-in-out;
+}
+
+#terminal {
+  @apply z-10;
+  @apply rounded-md;
+  background-color: rgba(127, 132, 109, 0.50);
+  @apply p-2;
+  @apply border;
+  @apply border-body;
+  @apply text-body;
+  @apply text-2xs;
+  @apply md:text-sm;
+}
+
+footer {
+  @apply py-6;
+  @apply bg-surface-alt;
+  @apply text-white;
+}
+
+
+$n: 45;
+$m: 7;
+$time: 3s;
+$deg: 360deg / $n;
+
+.notice-frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.notice {
+  @apply py-2;
+  @apply px-4;
+  @apply border;
+  border-color: #70695d;
+  @apply rounded-md;
+  background-color: #ada390;
+
+  position: relative;
+  top: 6vh;
+}
+
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  @apply bg-surface;
+  z-index: 99;
+  opacity: 0.5;
+}
+
+.v-w {
+  position: fixed;
+  z-index: 100;
+  top:  50%;
+  left: 50%;
+  width:  100vmin;
+  height: 100vmin;
+  margin: -50vmin 0 0 -50vmin;
+}
+
+.v-g {
+  position: absolute;
+  top:    0;
+  right:  0;
+  bottom: 0;
+  left:   0;
+  z-index: 100;
+}
+
+@for $i from 1 through ($n + 1) {
+  .v-g:nth-child(#{$i}) {transform: rotate(#{$i * $deg})} 
+}
+
+.v-e {
+  position: absolute;
+  top:  50%;
+  left:  0;
+  width: 50%;
+  height: 2%;
+  margin-top: -1%;
+  transform-origin: 100% 50%;
+  animation: rotate $time linear infinite;
+  z-index: 100;
+}
+
+  .v-e:before {
+    content: '';
+    position: absolute;
+    top:   0;
+    right: 0;
+    width:    4%;
+    height: 100%;
+    background-color: #000;
+    border-radius: 50%;
+    transform: translate3d(-400%,0,0) scale(0);
+    animation: move $time linear infinite;
+    /* --scale-factor: #{random(100) / 100}; */
+    --scale-factor: 0.35; 
+  }
+
+@for $i from 1 through $m {
+  $step: $time / $m;
+  $randomDelay: random(5000) * 1ms;
+  
+  .v-e:nth-child(#{$i}), .v-e:nth-child(#{$i}):before {animation-delay: $randomDelay}
+  .v-g:nth-child(2n) > .v-e:nth-child(#{$i}), .v-g:nth-child(2n) > .v-e:nth-child(#{$i}):before {animation-delay: $randomDelay}
+}
+
+  
+@keyframes move {
+  0% {transform: translate3d(-400%,0,0) scale(0)}
+  9.5% {transform: translate3d(-556%,0,0) scale(calc(0.4 * var(--scale-factor)))}
+  47.5% {transform: translate3d(-1180%,0,0) scale(calc(1 * var(--scale-factor)))}
+  81% {transform: translate3d(-1726%,0,0) scale(calc(0.8 * var(--scale-factor)))}
+  95% {transform: translate3d(-1960%,0,0) scale(0)}
+  100% {transform: translate3d(-1960%,0,0) scale(0)}
+}
+
+@keyframes rotate {
+  0% {transform: rotate(0)}
+  100% {transform: rotate(20.5deg)}
+}
+
+.v-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: 'Mono', sans-serif;
+  font-size: 4rem;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
